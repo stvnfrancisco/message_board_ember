@@ -1,5 +1,5 @@
-Board.Answer = DS.Model.extend({
-  name: DS.attr(),
+App.Answer = DS.Model.extend({
   text: DS.attr(),
+  author: DS.attr(),
   question: DS.belongsTo('question', {async: true})
 });

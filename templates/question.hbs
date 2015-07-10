@@ -1,52 +1,52 @@
-{{#if isEditing}}
+<div class="row move-down">
+  <div class="col-md-6 col-md-offset-3 outlined">
 
-  <form>
-    <div class="form-group">
-      <label for="author">Name</label>
-      {{input id="author" class="form-control" value=author}}
-    </div>
-    <div class="form-group">
-      <label for="question">Question</label>
-      {{input id="question" class="form-control" value=question}}
-    </div>
-    <div class="form-group">
-      <label for="description">Description</label>
-      {{textarea id="description" class="form-control" rows="15" value=description}}
-    </div>
+    <p>Asked by {{author}}:</p>
+    <hr>
 
-    <button class="btn btn-default btn-xs" {{action 'save'}}>Save</button>
-
-  </form>
-
-  {{else}}
-
-<div class="jumbotron">
-  <div class="page-header">
-  <h2>{{question}} <small>{{author}}</small></h2>
-</div>
-  <br>
-  <p>{{description}}</p>
-
-  <button class="btn btn-primary" {{action 'edit'}}>Edit</button>
-  <button class="btn btn-danger" {{action 'delete'}}>Delete</button>
-</div>
-
-{{/if}}
-
-<p class="lead">Answers</p>
-  {{#each answers}}
-    <p>
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          <h3 class="panel-title">{{name}}</h3>
+    {{#if isEditing}}
+      <form>
+        <div class="form-group">
+          <label for="title">Question</label>
+          {{input value=text class="form-control"}}
         </div>
-        <div class="panel-body">{{text}}</div>
-    </div>
-    </p>
 
-  {{/each}}
+        <div class="form-group">
+          <label for="body">More information</label>
+          {{textarea value=description class="form-control" rows="15"}}
+        </div>
 
+        <button class="btn btn-primary" {{action 'save'}}>Save</button>
+      </form>
+    {{else}}
 
-<p>{{#link-to 'new-answer' this.id class="btn btn-default answerbtn"}}Post response{{/link-to}}</p>
+      <p>{{text}}</p>
+      <p>{{description}}</p>
 
-{{outlet}}
+      <span class="linkify" {{action 'edit'}}>Edit</span>
+    {{/if}}
+
+    <h2>Respond to this question</h2>
+
+    <ul id="response-list">
+      {{#each answer in answers itemController="answer"}}
+          <li>
+            <p>
+              {{answer.text}}
+            </p>
+
+            <span class="answer-author-delete">
+              Answered by {{answer.author}} |
+              <a href="#" {{action 'delete'}} class="delete-response">delete</a>
+            </span>
+
+          </li>
+      {{/each}}
+      </ul>
+
+    <p>{{#link-to 'new-answer' this class="btn btn-primary"}}Respond{{/link-to}}</p>
+
+    {{outlet}}
+
+  </div>
+</div>

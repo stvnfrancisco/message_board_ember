@@ -1,10 +1,13 @@
 <form>
   <div class="form-group">
-    <label for="name">Name</label>
-    {{input value=name id="name" class="form-control"}}
-    <label for="text">Thoughts?</label>
-    {{textarea value=text id="text" class="form-control" rows="15"}}
+    <label for="text">Name</label>
+    {{input value=author class="form-control"}}
   </div>
 
-  <button class="btn btn-primary" {{action 'save'}}>Submit</button>
+  <div class="form-group">
+    <label for="text">Respond</label>
+    {{textarea value=text id="text" class="form-control" rows="5"}}
+  </div>
+
+  <button class="btn btn-primary" {{action "save"}}>Submit</button>
 </form>

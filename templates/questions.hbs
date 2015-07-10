@@ -1,15 +1,18 @@
-
-  <h1>Message Board</h1>
-
-  <p>{{#link-to 'new-question' classNames="btn btn-default newTopic"}}Start a conversation{{/link-to}}</p>
-
+<div class="row text-center vertically-spaced-md">
+  <br>
+    {{#link-to 'new-question' classNames='btn btn-default'}}Ask{{/link-to}}
+</div>
+<br>
 <div class="row">
-  <div class="col-md-6">
-    <ul>
-      {{#each}}
-        <li>{{#link-to 'question' this.id}}{{question}}{{/link-to}}
-        <font size="1"><em>{{author}}</em></font>
-        </li>
+  <div class="col-md-6 col-md-offset-3">
+    <ul class="link-list">
+      {{#each question in model}}
+        {{#link-to 'question' question}}
+          <li>
+            <span class="question">{{question.text}}</span>
+            <span class="author">Asked by {{question.author}}</span>
+          </li>
+        {{/link-to}}
       {{/each}}
     </ul>
   </div>
