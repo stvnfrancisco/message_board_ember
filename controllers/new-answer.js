@@ -1,14 +1,20 @@
-App.NewAnswerController = Ember.ObjectController.extend({
+App.NewAnswerController = Ember.Controller.extend({
+  needs: ['question'],
   actions: {
     save: function() {
-      var answer = this.get('model');
+      var answer = this.store.createRecord('answer', {
+          name: this.get('name'),
+          text: this.get('text'),
+      });
       answer.save();
 
-      var controller = this;
-      answer.get('question').then(function(question) {
-        question.save();
-        controller.transitionToRoute('question', question);
-      });
+      var question = this.get('controllers.question.model');
+      question.get('answers').pushObject(answer);
+      question.save();
+
+      this.set('name', '');
+      this.set('text', '');
+      this.transitionToRoute('question', question.id);
     }
   }
 });
