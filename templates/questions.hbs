@@ -6,12 +6,13 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <ul class="link-list">
+      <h1>List of Questions:</h1>
       {{#each question in model}}
         {{#link-to 'question' question}}
-          <li>
+          <h4><li>
             <span class="question">{{question.text}}</span>
             <span class="author">Asked by {{question.author}}</span>
-          </li>
+          </li></h4>
         {{/link-to}}
       {{/each}}
     </ul>
