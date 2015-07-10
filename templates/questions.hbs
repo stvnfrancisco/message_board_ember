@@ -1,0 +1,16 @@
+
+  <h1>Message Board</h1>
+
+  <p>{{#link-to 'new-question' classNames="btn btn-default newTopic"}}Start a conversation{{/link-to}}</p>
+
+<div class="row">
+  <div class="col-md-6">
+    <ul>
+      {{#each}}
+        <li>{{#link-to 'question' this.id}}{{question}}{{/link-to}}
+        <font size="1"><em>{{author}}</em></font>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
